@@ -1,0 +1,73 @@
+<mat-toolbar class="outlet-view-header">
+    <mat-toolbar-row>
+        <span class="center-text">({{selectedPair}}) Price Live -
+            {{getPartnerName(selectedPartner)}}</span>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<div fxLayout="row" fxLayout.lt-md="column" fxLayoutWrap fxLayoutGap="2%" fxLayoutAlign="center">
+    <mat-card class="mat-elevation-z2 card-margin-bottom">
+        <mat-card-content>
+            <div>
+                <mat-form-field class="right-pad" appearance="outline" floatLabel="always">
+                    <mat-label>Pair</mat-label>
+                    <mat-select [(value)]="selectedPair" (selectionChange)="onPairChange()">
+                        <mat-option *ngFor="let pair of pairs" [value]="pair">
+                            {{pair}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="right-pad" appearance="outline" floatLabel="always">
+                    <mat-label>Provider</mat-label>
+                    <mat-select [(value)]="selectedPartner">
+                        <mat-option *ngFor="let partner of partners" [value]="partner.id">
+                            {{partner.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="right-pad" appearance="outline" floatLabel="always">
+                    <mat-label>Interval</mat-label>
+                    <mat-select [(value)]="interval" (selectionChange)="onChangeTimer()">
+                        <mat-option *ngFor="let i of [1, 2, 3, 5, 10, 15, 30]" [value]="i">
+                            {{i}} Second
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+            </div>
+
+            <div>
+                <mat-progress-spinner mode="indeterminate" *ngIf="listItems.length == 0"></mat-progress-spinner>
+                <mat-list role="list">
+                    <mat-list-item role="listitem" *ngFor="let item of listItems">
+
+                        <table class="center-text">
+                            <tr>
+                                <td>
+                                    <span [ngClass]="{'green-color': item.bpStatus === 'inc', 'red-color': item.bpStatus === 'dec'}">BUY: {{item.buyPrice}}</span>
+                                    <mat-icon *ngIf="item.bpStatus === 'inc'" class="green-color">arrow_upward</mat-icon>
+                                    <mat-icon *ngIf="item.bpStatus === 'dec'" class="red-color">arrow_downward</mat-icon>
+                                    <mat-icon *ngIf="item.bpStatus === 'nochange'"></mat-icon>
+                                </td>
+                                <td>
+                                    <span [ngClass]="{'green-color': item.spStatus === 'inc', 'red-color': item.spStatus === 'dec'}">SELL: {{item.sellPrice}}</span>
+                                    <mat-icon *ngIf="item.spStatus === 'inc'" class="green-color">arrow_upward</mat-icon>
+                                    <mat-icon *ngIf="item.spStatus === 'dec'" class="red-color">arrow_downward</mat-icon>
+                                    <mat-icon *ngIf="item.spStatus === 'nochange'"></mat-icon>
+                                </td>
+                                <td>
+                                    <span style="color: grey;">{{item.time}}</span>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </mat-list-item>
+                </mat-list>
+            </div>
+
+        </mat-card-content>
+    </mat-card>
+
+</div>

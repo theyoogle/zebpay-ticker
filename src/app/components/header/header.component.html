@@ -1,0 +1,25 @@
+<mat-toolbar>
+    <mat-toolbar-row>
+
+        <button mat-icon-button>
+            <mat-icon>menu</mat-icon>
+        </button>
+
+        <span class="active-page">Zebpay Price</span>
+
+        <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
+            <ul fxLayout="row" fxLayoutGap="20px">
+                <button mat-icon-button [matMenuTriggerFor]="appMenu">
+                    <mat-icon>person_outline</mat-icon>
+                </button>
+                <mat-menu #appMenu="matMenu">
+                    <button mat-menu-item>
+                        <mat-icon>exit_to_app</mat-icon>
+                        <a target="_blank" href="https://theyoogle.com">The YooGle</a>
+                    </button>
+                </mat-menu>
+            </ul>
+        </div>
+
+    </mat-toolbar-row>
+</mat-toolbar>
