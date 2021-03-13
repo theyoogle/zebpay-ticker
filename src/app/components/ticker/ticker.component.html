@@ -40,31 +40,36 @@
 
             <div>
                 <mat-progress-spinner mode="indeterminate" *ngIf="listItems.length == 0"></mat-progress-spinner>
-                <mat-list role="list">
-                    <mat-list-item role="listitem" *ngFor="let item of listItems">
 
-                        <table class="center-text">
-                            <tr>
-                                <td>
-                                    <span [ngClass]="{'green-color': item.bpStatus === 'inc', 'red-color': item.bpStatus === 'dec'}">BUY: {{item.buyPrice}}</span>
-                                    <mat-icon *ngIf="item.bpStatus === 'inc'" class="green-color">arrow_upward</mat-icon>
-                                    <mat-icon *ngIf="item.bpStatus === 'dec'" class="red-color">arrow_downward</mat-icon>
-                                    <mat-icon *ngIf="item.bpStatus === 'nochange'"></mat-icon>
-                                </td>
-                                <td>
-                                    <span [ngClass]="{'green-color': item.spStatus === 'inc', 'red-color': item.spStatus === 'dec'}">SELL: {{item.sellPrice}}</span>
-                                    <mat-icon *ngIf="item.spStatus === 'inc'" class="green-color">arrow_upward</mat-icon>
-                                    <mat-icon *ngIf="item.spStatus === 'dec'" class="red-color">arrow_downward</mat-icon>
-                                    <mat-icon *ngIf="item.spStatus === 'nochange'"></mat-icon>
-                                </td>
-                                <td>
-                                    <span style="color: grey;">{{item.time}}</span>
-                                </td>
-                            </tr>
-                        </table>
+                <table id="table" class="table table-borderless" *ngIf="listItems.length != 0">
+                    <thead>
+                        <tr>
+                            <th>Buy</th>
+                            <th>Sell</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of listItems">
+                            <td>
+                                <span [ngClass]="{'green-color': item.bpStatus === 'inc', 'red-color': item.bpStatus === 'dec'}">{{item.buyPrice}}</span>
+                                <mat-icon *ngIf="item.bpStatus === 'inc'" class="green-color">arrow_upward</mat-icon>
+                                <mat-icon *ngIf="item.bpStatus === 'dec'" class="red-color">arrow_downward</mat-icon>
+                                <mat-icon *ngIf="item.bpStatus === 'nochange'"></mat-icon>
+                            </td>
+                            <td>
+                                <span [ngClass]="{'green-color': item.spStatus === 'inc', 'red-color': item.spStatus === 'dec'}">{{item.sellPrice}}</span>
+                                <mat-icon *ngIf="item.spStatus === 'inc'" class="green-color">arrow_upward</mat-icon>
+                                <mat-icon *ngIf="item.spStatus === 'dec'" class="red-color">arrow_downward</mat-icon>
+                                <mat-icon *ngIf="item.spStatus === 'nochange'"></mat-icon>
+                            </td>
+                            <td>
+                                <span style="color: grey;">{{item.time}}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
 
-                    </mat-list-item>
-                </mat-list>
             </div>
 
         </mat-card-content>

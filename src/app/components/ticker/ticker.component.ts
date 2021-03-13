@@ -77,7 +77,7 @@ export class TickerComponent implements OnInit {
     var formatter = new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: currency,
-      maximumFractionDigits: 4
+      maximumFractionDigits: 2
     });
     
     return formatter.format(value);
